@@ -675,6 +675,20 @@ wkeyctl(Window *w, Rune r)
 			wsetselect(w, w->qh, w->qh);
 			wshow(w, w->q0);
 			return;
+		case 0xE928: /* Shift+Enter: send a line or selection */
+			if(w->q0 != w->q1){
+				wsend(w);
+				return;
+			}
+			if(w->q0==0 || w->q0==w->qh || w->r[w->q0-1]=='\n')
+				q0 = w->q0;
+			else
+				q0 = w->q0 - wbswidth(w, 0x15);
+			for(q1 = w->q0; q1 < w->nr && w->r[q1]!='\n'; q1++)
+				;
+			wsetselect(w, q0, q1);
+			wsend(w);
+			return;
 		}
 	if(w->rawing && (w->q0==w->nr || w->mouseopen)){
 		waddraw(w, &r, 1);
