@@ -143,10 +143,12 @@ newrect(void)
 	static int i = 0;
 	int minx, miny, dx, dy;
 
-	dx = min(600, Dx(screen->r) - 2*Borderwidth);
-	dy = min(400, Dy(screen->r) - 2*Borderwidth);
-	minx = 32 + 16*i;
-	miny = 32 + 16*i;
+	/* assume 8x16 font; ideally, the actual measure would
+	 * be taken with stringsize(2). */
+	dx = min(8*82, Dx(screen->r) - 2*Borderwidth);
+	dy = min(16*24, Dy(screen->r) - 2*Borderwidth);
+	minx = Dx(screen->r)/2 - dx/2;
+	miny = 32 + (16+8)*i;
 	i++;
 	i %= 10;
 
