@@ -535,6 +535,8 @@ mousethread(void*)
 				continue;
 			}
 			w = wpointto(mouse->xy);
+			if(w!=nil)
+				wtop(mouse->xy);
 			if(w!=nil && inborder(w->screenr, mouse->xy))
 				riosetcursor(corners[whichcorner(w->screenr, mouse->xy)]);
 			else
