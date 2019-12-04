@@ -194,7 +194,7 @@ iconinit(void)
 	dholdcol = allocimage(display, Rect(0,0,1,1), CMAP8, 1, DMedblue);
 	lightholdcol = allocimage(display, Rect(0,0,1,1), CMAP8, 1, DGreyblue);
 	paleholdcol = allocimage(display, Rect(0,0,1,1), CMAP8, 1, DPalegreyblue);
-	paletextcol = allocimage(display, Rect(0,0,1,1), CMAP8, 1, 0x666666FF^reverse);
+	paletextcol = cols[TEXT];
 	sizecol = allocimage(display, Rect(0,0,1,1), CMAP8, 1, DRed);
 
 	if(reverse == 0)
