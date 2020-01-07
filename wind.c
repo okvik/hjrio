@@ -14,9 +14,9 @@
 
 enum
 {
-	HiWater	= 640000,	/* max size of history */
-	LoWater	= 400000,	/* min size of history after max'ed */
-	MinWater	= 20000,	/* room to leave available when reallocating */
+	HiWater	= 2000000,	/* max size of history */
+	LoWater	= 1500000,	/* min size of history after max'ed */
+	MinWater	= 100000,	/* room to leave available when reallocating */
 };
 
 static	int	topped;
