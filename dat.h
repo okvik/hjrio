@@ -341,6 +341,7 @@ int		nsnarf;
 Rune*	snarf;
 int		scrolling;
 int		maxtab;
+Channel*	exitchan;
 Channel*	winclosechan;
 char		*startdir;
 int		sweeping;

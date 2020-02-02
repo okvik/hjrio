@@ -30,6 +30,7 @@ enum
 	Hide,
 	Unhide,
 	Delete,
+	Exit,
 };
 
 static char *cmds[] = {
@@ -45,6 +46,7 @@ static char *cmds[] = {
 	[Hide]	= "hide",
 	[Unhide]	= "unhide",
 	[Delete]	= "delete",
+	[Exit]	= "exit",
 	nil
 };
 
@@ -215,6 +217,10 @@ parsewctl(char **argp, Rectangle r, Rectangle *rp, int *pidp, int *idp, int *hid
 	}
 	if(cmd == New)
 		r = newrect();
+	if(cmd == Exit){
+		send(exitchan, nil);
+		return cmd;
+	}
 
 	strcpy(err, "missing or bad wctl parameter");
 	while((param = word(&s, params)) >= 0){
@@ -471,6 +477,8 @@ writewctl(Xfid *x, char *err)
 	}
 
 	switch(cmd){
+	case Exit:
+		return 1;
 	case New:
 		return wctlnew(r, arg, pid, hideit, scrollit, dir, err);
 	case Set:
