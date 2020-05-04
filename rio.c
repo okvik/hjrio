@@ -535,8 +535,8 @@ mousethread(void*)
 				continue;
 			}
 			w = wpointto(mouse->xy);
-			if(w!=nil && !shiftdown)
-				wtop(mouse->xy);
+			if(w!=nil)
+				input = w;
 			if(w!=nil && inborder(w->screenr, mouse->xy))
 				riosetcursor(corners[whichcorner(w->screenr, mouse->xy)]);
 			else
@@ -1146,11 +1146,8 @@ new(Image *i, int hideit, int scrollit, int pid, char *dir, char *cmd, char **ar
 		w->screenr = ZR;
 	}
 	threadcreate(winctl, w, 8192);
-	if(!hideit){
-		if(!ptinrect(mouse->xy, w->screenr))
-			moveto(mousectl, Pt(w->screenr.max.x-2, w->screenr.max.y-2));
+	if(!hideit)
 		wcurrent(w);
-	}
 	if(pid == 0){
 		arg = emalloc(5*sizeof(void*));
 		arg[0] = w;
