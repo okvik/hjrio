@@ -138,6 +138,9 @@ threadmain(int argc, char *argv[])
 	case 'f':
 		fontname = EARGF(usage());
 		break;
+	case 'F':
+		followfocus = 1;
+		break;
 	case 'i':
 		initstr = EARGF(usage());
 		break;
@@ -535,6 +538,8 @@ mousethread(void*)
 				continue;
 			}
 			w = wpointto(mouse->xy);
+			if(w!=nil && followfocus)
+				wtop(mouse->xy);
 			if(w!=nil && inborder(w->screenr, mouse->xy))
 				riosetcursor(corners[whichcorner(w->screenr, mouse->xy)]);
 			else
